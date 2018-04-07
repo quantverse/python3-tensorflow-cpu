@@ -4,7 +4,7 @@ LABEL maintainer "QUANTVERSE <info@quantverse.com>"
 
 # install packages
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends software-properties-common curl python3-dev python3-wheel python3-setuptools python3-pip git build-essential \
+    && apt-get install -y --no-install-recommends software-properties-common curl python3-dev python3-wheel python3-setuptools python3-pip git build-essential pkg-config zip zlib1g-dev unzip \
     && ln -s /usr/bin/python3 /usr/bin/python \
     && rm -rf /var/lib/apt/lists/*
 
@@ -16,11 +16,9 @@ RUN add-apt-repository ppa:webupd8team/java \
     && rm -rf /var/lib/apt/lists/*
 
 # install bazel
-RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
-    && curl https://bazel.build/bazel-release.pub.gpg | apt-key add - \
-    && apt-get update \
-    && apt-get install -y bazel \
-    && rm -rf /var/lib/apt/lists/*
+RUN curl -L https://github.com/bazelbuild/bazel/releases/download/0.5.4/bazel-0.5.4-without-jdk-installer-linux-x86_64.sh --output bazel.sh \
+    && chmod +x bazel.sh \
+    && ./bazel.sh
 
 # install few pip modules
 RUN pip3 install --upgrade pip \
