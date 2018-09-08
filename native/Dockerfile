@@ -1,6 +1,5 @@
-# quantverse/python3-tensorflow-cpu:v1-native
-FROM ubuntu:xenial
-LABEL maintainer "QUANTVERSE <info@quantverse.com>"
+# quantverse/python3-tensorflow-cpu:v1.9-native
+FROM ubuntu:bionic
 
 # install packages
 RUN apt-get update \
@@ -16,18 +15,17 @@ RUN add-apt-repository ppa:webupd8team/java \
     && rm -rf /var/lib/apt/lists/*
 
 # install bazel
-RUN curl -L https://github.com/bazelbuild/bazel/releases/download/0.5.4/bazel-0.5.4-without-jdk-installer-linux-x86_64.sh --output bazel.sh \
+RUN curl -L https://github.com/bazelbuild/bazel/releases/download/0.13.0/bazel-0.13.0-without-jdk-installer-linux-x86_64.sh --output bazel.sh \
     && chmod +x bazel.sh \
     && ./bazel.sh
 
 # install few pip modules
-RUN pip3 install --upgrade pip \
-    && pip3 install numpy
+RUN pip3 install numpy
 
 # install tensorflow
 RUN git clone https://github.com/tensorflow/tensorflow /tf \
     && cd /tf \
-    && git checkout r1.0 \
+    && git checkout r1.9 \
     && export PYTHON_BIN_PATH=/usr/bin/python \
     && export CC_OPT_FLAGS=-march=native \
     && export TF_NEED_JEMALLOC=1 \
