@@ -3,15 +3,8 @@ FROM ubuntu:bionic
 
 # install packages
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends software-properties-common curl python3-dev python3-wheel python3-setuptools python3-pip git build-essential pkg-config zip zlib1g-dev unzip \
+    && apt-get install -y --no-install-recommends software-properties-common curl python3-dev python3-wheel python3-setuptools python3-pip git build-essential pkg-config zip zlib1g-dev unzip openjdk-8-jdk \
     && ln -s /usr/bin/python3 /usr/bin/python \
-    && rm -rf /var/lib/apt/lists/*
-
-# install oracle java
-RUN add-apt-repository ppa:webupd8team/java \
-    && apt-get update \
-    && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
-    && apt-get install -y oracle-java8-installer \
     && rm -rf /var/lib/apt/lists/*
 
 # install bazel
