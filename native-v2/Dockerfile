@@ -1,4 +1,4 @@
-# quantverse/python3-tensorflow-cpu:v2.1-native
+# quantverse/python3-tensorflow-cpu:v2.0-native
 # use this for tensorflow v2
 FROM ubuntu:bionic
 
@@ -22,7 +22,7 @@ RUN python -m pip install pip --upgrade \
 # install tensorflow
 RUN git clone https://github.com/tensorflow/tensorflow /tf \
     && cd /tf \
-    && git checkout r2.1 \
+    && git checkout r2.0 \
     && export PYTHON_BIN_PATH=/usr/bin/python \
     && export CC_OPT_FLAGS=-march=native \
     && export TF_ENABLE_XLA=0 \
