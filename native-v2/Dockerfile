@@ -9,7 +9,7 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/*
 
 # install bazel
-RUN curl -L https://github.com/bazelbuild/bazel/releases/download/0.29.1/bazel-0.29.1-installer-linux-x86_64.sh --output bazel.sh \
+RUN curl -L https://github.com/bazelbuild/bazel/releases/download/0.26.1/bazel-0.26.1-installer-linux-x86_64.sh --output bazel.sh \
     && chmod +x bazel.sh \
     && ./bazel.sh
 
